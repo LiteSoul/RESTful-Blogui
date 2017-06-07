@@ -1,0 +1,49 @@
+<% include ./partials/header %>
+
+
+<div class="container" id="all-blogs">
+	<div class="columns is-multiline">
+
+		<% blogs.forEach(function(blog){ %>
+				<div class="column is-half">
+					<a href="/blogs/<%= blog._id %>">
+						<h2 class="title is-2"><%= blog.title %></h2>
+					</a>
+					<p class="subtitle is-5">By <%= blog.author %>, on <span><%= blog.created %></span></p>
+					<figure class="image is-16by9">
+						<img src="<%= blog.image %>" alt="">
+					</figure>
+					<p><%= blog.body %></p>
+					<hr>
+				</div>
+		<% }) %>
+
+	</div>
+
+
+<div class="tile is-multiline is-ancestor">
+
+		
+				<% blogs.forEach(function(blog){ %>
+					<div class="tile is-6 is-parent">
+						<div class="tile is-child box">
+							<a href="/blogs/<%= blog._id %>">
+								<p class="title"><%= blog.title %></p>
+							</a>
+							<p class="subtitle is-5">By <%= blog.author %>, on <span><%= blog.created %></span></p>
+							<figure class="image is-16by9">
+								<img src="<%= blog.image %>" alt="">
+							</figure>
+							<p><%= blog.body %></p>
+							<hr>
+						</div>
+					</div>
+		<% }) %>
+		
+
+
+</div>
+		
+		
+      
+<% include ./partials/footer %>

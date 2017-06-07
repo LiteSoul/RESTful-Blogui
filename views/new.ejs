@@ -1,0 +1,47 @@
+<% include ./partials/header %>
+
+<form action="/blogs" method="POST">
+	<section class="section">
+		<div class="container">	
+
+			<div class="field">
+				<label for="" class="label">Title:</label>
+				<p class="control">
+					<input type="text" class="input" placeholder="Title of the post" name="blog[title]">
+				</p>
+			</div>
+
+			<div class="field">
+				<label for="" class="label">Author:</label>
+				<p class="control">
+					<input type="text" class="input" placeholder="Your name" name="blog[author]">
+				</p>
+			</div>
+			
+			<div class="field">
+				<label for="" class="label">Image:</label>
+				<p class="control">
+					<input type="text" class="input" placeholder="Main image to represent your post" name="blog[image]">
+				</p>
+			</div>
+
+			<div class="field">
+				<label class="label">Text:</label>
+				<p class="control">
+					<textarea class="textarea" placeholder="Main text content of the post" name="blog[body]"></textarea>
+				</p>
+			</div>
+
+			<div class="field">
+				<p class="control">
+					<button class="button is-success">Submit</button>
+				</p>
+			</div>
+
+		</div>
+	</section>
+</form>
+
+
+
+<% include ./partials/footer %>
