@@ -77,8 +77,8 @@ db.once("open", function() {
 })
 
 //check connection through express
-//with codeanywhere port 3000 works, on heroku lets try process.env.PORT
-app.listen(process.env.PORT, function () {
+//with codeanywhere port 3000 works, on heroku it's process.env.PORT
+app.listen(3000, function () {
   console.log('YelpCamp app listening on port 3000!')
 })
 
