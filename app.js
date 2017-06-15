@@ -16,7 +16,7 @@ mongoose.connect("mongodb://tester:tester@ds113702.mlab.com:13702/nodetester")
 var blogSchema = new mongoose.Schema({
 	title: String,
 	author: String,
-	image: {type: String, default:"placeholderimage.jpg"},
+	image: {type: String, default:"/images/placeholderimage.jpg"},
 	body: String,
 	created: {type: Date, default: Date.now}
 })
