@@ -4,9 +4,7 @@ var bodyParser = require("body-parser")
 var app = express()
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}))
-//relative to running app: app.use(express.static("public"))
-//absolute:
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static("public"))
 
 // mongoose
 var mongoose = require("mongoose")
