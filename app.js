@@ -67,13 +67,9 @@ app.get("/blogs/:id",(req,res) => {
 	})
 })
 
-//check connection
-var db = mongoose.connection
-db.on("error", console.error.bind(console, "connection error:"))
-db.once("open", function() {
-// we're connected!
-	console.log("WE ARE CONNECTED REALLY")
-})
+
+
+
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku, on localhost or codeanywhere 3000
@@ -82,6 +78,14 @@ var port = process.env.PORT || 3000
 //check connection through express
 app.listen(port, function() {
 	console.log("Our app is running on http://localhost:" + port)
+})
+
+//check connection
+var db = mongoose.connection
+db.on("error", console.error.bind(console, "connection error:"))
+db.once("open", function() {
+// we're connected!
+	console.log("WE ARE CONNECTED REALLY")
 })
 
 //Asterisk for a 404 route
