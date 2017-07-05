@@ -8,7 +8,7 @@
 					<a href="/blogs/<%= blog._id %>">
 						<h2 class="title is-2"><%= blog.title %></h2>
 					</a>
-					<p class="subtitle is-5">By <%= blog.author %>, on <span><%= blog.created %></span></p>
+					<p class="subtitle is-5">By <%= blog.author %>, on <span><%= blog.created.toDateString() %></span></p>
 					<figure class="image is-16by9">
 						<img src="<%= blog.image %>" alt="">
 					</figure>
