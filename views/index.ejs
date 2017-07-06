@@ -12,13 +12,13 @@
 					<figure class="image is-16by9">
 						<img src="<%= blog.image %>" alt="">
 					</figure>
-					<p><%- blog.body %></p>
-					<a href="/blogs/<%= blog._id %>" class="button is-info">Read More</a>
+					<p><%= blog.body.substring(0,145) %> ...</p>
+					<a href="/blogs/<%= blog._id %>" class="button is-light is-small">Read More</a>
 					<hr>
 				</div>
 		<% }) %>
 
 	</div>
 </div>
-  
+
 <% include ./partials/footer %>

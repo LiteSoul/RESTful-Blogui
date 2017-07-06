@@ -1,36 +1,38 @@
 <% include ./partials/header %>
 
-<form action="/blogs" method="POST">
+<form action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
 	<section class="section">
 		<div class="container">	
 
-			<h1 class="title is-1">Create a new Blog post</h1>
+			<h1 class="title is-1">Now Editing <%= blog.title %></h1>
 
 			<div class="field">
 				<label for="" class="label">Title:</label>
 				<p class="control">
-					<input type="text" class="input" placeholder="Title of the post" name="blog[title]">
+					<input type="text" class="input" value="<%= blog.title %>" name="blog[title]">
 				</p>
 			</div>
 
 			<div class="field">
 				<label for="" class="label">Author:</label>
 				<p class="control">
-					<input type="text" class="input" placeholder="Your name" name="blog[author]">
+					<input type="text" class="input" value="<%= blog.author %>" name="blog[author]">
 				</p>
 			</div>
 			
 			<div class="field">
 				<label for="" class="label">Image:</label>
 				<p class="control">
-					<input type="text" class="input" placeholder="Main image to represent your post" name="blog[image]">
+					<input type="text" class="input" value="<%= blog.image %>" name="blog[image]">
 				</p>
 			</div>
 
 			<div class="field">
 				<label class="label">Text:</label>
 				<p class="control">
-					<textarea class="textarea" placeholder="Main text content of the post" name="blog[body]"></textarea>
+					<textarea class="textarea" placeholder="Main text content of the post" name="blog[body]">
+						<%- blog.body %>
+					</textarea>
 				</p>
 			</div>
 

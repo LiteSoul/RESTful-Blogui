@@ -1,11 +1,13 @@
 var express = require("express")
 var bodyParser = require("body-parser")
-
+//Because HTML doesn't suppor the RESTful PUT or DEL methods
+var methodOverride = require("method-override")
 var app = express()
+//APP CONFIG
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"))
-
+app.use(methodOverride("_method"))
 // mongoose
 var mongoose = require("mongoose")
 //mongoose.connect("mongodb://localhost/restful-blog")
@@ -67,9 +69,28 @@ app.get("/blogs/:id",(req,res) => {
 	})
 })
 
+//EDIT ROUTE
+app.get("/blogs/:id/edit",(req,res) => {
+	Blog.findById(req.params.id,(err,foundBlog) => {
+		if(err){
+			res.redirect("/blogs")
+		} else{
+			res.render("edit",{blog:foundBlog})
+		}
+	})
+})
 
-
-
+//UPDATE ROUTE
+app.put("/blogs/:id",(req,res) => {
+	//(id, newData, callback)
+	Blog.findByIdAndUpdate(req.params.id,req.body.blog,(err,updatedBlog) => {
+		if(err){
+			res.redirect("/blogs")
+		} else{
+			res.redirect("/blogs/" + req.params.id)
+		}
+	})
+})
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku, on localhost or codeanywhere 3000
@@ -85,7 +106,7 @@ var db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error:"))
 db.once("open", function() {
 // we're connected!
-	console.log("WE ARE CONNECTED REALLY")
+	console.log("MongoDB (mlab) is engaged!")
 })
 
 //Asterisk for a 404 route
