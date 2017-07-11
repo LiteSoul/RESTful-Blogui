@@ -2,10 +2,14 @@ var express = require("express")
 var bodyParser = require("body-parser")
 //Because HTML doesn't suppor the RESTful PUT or DEL methods
 var methodOverride = require("method-override")
+//Removes all scripts and just leave pure HTML
+let expressSanitizer = require("express-sanitizer")
 var app = express()
 //APP CONFIG
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}))
+//sanitizer goes after bodyParser
+app.use(expressSanitizer())
 app.use(express.static("public"))
 app.use(methodOverride("_method"))
 // mongoose
@@ -44,6 +48,11 @@ app.get("/blogs/new",(req,res) => {
 })
 //CREATE ROUTE
 app.post("/blogs",(req,res) => {
+	//sanitizer in action, with a log to show before/after
+	console.log(req.body)
+	req.body.blog.body = req.sanitize(req.body.blog.body)
+	console.log("-------------")
+	console.log(req.body)
 	//takes the data (req.body.blog) and creates a new blog
 	//.blog contains 3 groupedd items
 	//after creation, it executes the callback, which is go back to blogs list
@@ -68,9 +77,9 @@ app.get("/blogs/:id",(req,res) => {
 		}
 	})
 })
-
 //EDIT ROUTE
 app.get("/blogs/:id/edit",(req,res) => {
+	req.body.blog.body = req.sanitize(req.body.blog.body)
 	Blog.findById(req.params.id,(err,foundBlog) => {
 		if(err){
 			res.redirect("/blogs")
@@ -79,7 +88,6 @@ app.get("/blogs/:id/edit",(req,res) => {
 		}
 	})
 })
-
 //UPDATE ROUTE
 app.put("/blogs/:id",(req,res) => {
 	//(id, newData, callback)
@@ -91,9 +99,20 @@ app.put("/blogs/:id",(req,res) => {
 		}
 	})
 })
+//DELETE ROUTE
+app.delete("/blogs/:id",(req,res) => {
+	//res.send("YOU HAVE DESTROYED YOUR CREATURE...")
+	Blog.findByIdAndRemove(req.params.id,(err) => {
+		if(err){
+			res.redirect("/blogs")
+		} else{
+			res.redirect("/blogs")
+		}
+	})
+})
 
 // set the port of our application
-// process.env.PORT lets the port be set by Heroku, on localhost or codeanywhere 3000
+// process.env.PORT lets the port be set by Heroku, on localhost or codeanywhere is 3000
 var port = process.env.PORT || 3000
 
 //check connection through express

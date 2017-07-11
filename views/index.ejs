@@ -5,16 +5,57 @@
 
 		<% blogs.forEach(function(blog){ %>
 				<div class="column is-one-third">
+					<figure class="image is-16by9">
+						<img src="<%= blog.image %>" alt="">
+					</figure>
 					<a href="/blogs/<%= blog._id %>">
 						<h2 class="title is-2"><%= blog.title %></h2>
 					</a>
 					<p class="subtitle is-5">By <%= blog.author %>, on <span><%= blog.created.toDateString() %></span></p>
-					<figure class="image is-16by9">
-						<img src="<%= blog.image %>" alt="">
-					</figure>
 					<p><%= blog.body.substring(0,145) %> ...</p>
 					<a href="/blogs/<%= blog._id %>" class="button is-light is-small">Read More</a>
 					<hr>
+				</div>
+		<% }) %>
+
+	</div>
+</div>
+
+<div class="container" id="all-blogs">
+	<div class="columns is-multiline">
+
+		<% blogs.forEach(function(blog){ %>
+				<div class="column is-one-third">
+
+					<div class="card">
+						<div class="card-image">
+							<figure class="image is-16by9">
+								<img src="<%= blog.image %>" alt="">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="content">
+								<p class="title is-3"><%= blog.title %></p>
+							</div>
+							<div class="media">
+								<div class="media-left">
+									<figure class="image is-48x48">
+										<img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
+									</figure>
+								</div>
+								<div class="media-content">
+									<p class="title is-4">By <%= blog.author %></p>
+									<p class="subtitle is-6"><%= blog.created.toDateString() %></p>
+								</div>
+							</div>
+
+							<div class="content">
+								<p><%= blog.body.substring(0,180) %> ...</p>
+								<a href="/blogs/<%= blog._id %>" class="button is-light is-small">Read More</a>
+								<br>
+							</div>
+						</div>
+					</div>
 				</div>
 		<% }) %>
 

@@ -8,7 +8,11 @@
 		<h1 class="title is-1"><%= blog.title %></h1>
 		<p class="subtitle is-4">By <%= blog.author %>, on <span><%= blog.created.toDateString() %></span></p>
 		<p><%- blog.body %></p>
-		<hr>
+		<br>
+		<a href="/blogs/<%= blog._id %>/edit" class="button is-warning">Edit</a>
+		<form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+			<button class="button is-danger">Delete this blog entry</button>
+		</form>
   </div>
 </section>
 
