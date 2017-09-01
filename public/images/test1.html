@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Test auto invite</h1>
+	<script>
+		var slackTeam = "blockchainlitoral";
+		var token = 'xoxp-234636127360-234754623889-236384315463-bef969a4385b2a3537daafc6808fae75'; 
+		// A test token will suffice.
+		// You can generate one at https://api.slack.com/docs/oauth-test-tokens
+		// Just make sure that the user issuing the test token is an admin.
+
+		var url = 'https://'+ slackTeam + '.slack.com/api/users.admin.invite';
+		fetch(url, { 
+			method: 'POST',
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			body: "token="+ token + "&email=" + input.email
+		})
+		.then(function(res) {
+			return res.text();
+		})
+		.then(function(body) {
+			var output = {rawHTML: body};
+			callback(null, output);
+		})
+		.catch(callback);
+	</script>
+</body>
+</html>
